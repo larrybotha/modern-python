@@ -21,7 +21,6 @@
   - `choices(['red'] _ 18 + ['black'] _ 18 + ['green'] \* 2)
 - `choices` allows us to specify weightings, though, so we can specify a number
   of spins with a single line:
-
   ```python
   spins = choices(['red', 'black', 'green'], [18, 18, 2], k=6)
   ```
@@ -44,19 +43,15 @@
 - we could use `weights` in the call to `choices` to specify a heavy side of the
   coin, but `choices` has an additional option where we can specify a
   cumulative weight:
-
   ```python
   # 3 spins, where heads should show up 40% of the time
   choices(['heads', 'tails'], cum_weights=[.4, 1.00], k=3)
   ```
-
 - because `choices` returns a list, we can count the number of items in the
   list:
-
   ```python
   num_heads = choices(['heads', 'tails'], cum_weights=[.4, 1.00], k=3).count('heads')
   ```
-
 - the equivalent analytical approach (see [./examples.py](./examples.py))
   requires significantly more effort to implement
 - the empirical approach also has the benefit that the simulation scales up much
@@ -68,22 +63,17 @@
   to extract a pivot point that would sit within the middle quartile of the
   population?
 - we can generate a mean of sample of 5 values from a population:
-
   ```python
   n = 10000
   xs = sample(range(n), 5)
   avg = median(xs)
   ```
-
 - given a median from a sample, does it fall in the 2nd and 3rd quartiles of the
   population's distribution:
-
   ```python
   trial = lambda: n // 4 <= median(sample(range(n))) <= n // 4 * 3
   ```
-
 - what percentage of these medians can we expect to fall in the middle quartile:
-
   ```python
   result = sum(trial() for _ in range(n)) / n
   ```
@@ -139,29 +129,34 @@
   statistically significant result. If the value is only just over 5%, it
   usually indicates that a larger sample is required to improve feedback
 
+### Single server queue simulation
+
+[./queue.py](./queue.py)
+
 ## Additional
 
 - multiplying a list `xs` by an integer `n` will create a new list with repeated
   values and a length of `len(xs) * n`:
-
   ```python
   xs = [1,2]
   ys = xs * 2 # => [1,2,1,2]
   ```
-
 - flipping a weighted coin generally yields a 50% chance of landing on either
   side, whereas _spinning_ a weighted coin has a higher probability of landing
   on the weighted side
 - `/` is true division, whereas `//` is floor division:
-
   ```python
   true_div = 100 / 2 # 50.0
   floored_div = 100 // 2 # 50
   ```
-
 - given a list, get the:
   - first 5 values: `xs[5:]`
   - last 5 values: `xs[-5:]`
+- `random.expovariate` produces values in an exponential distribution, using the
+  reciprocal of the value provided
+- `xs.append(item)` is significantly faster than `[*xs, item]` and `xs + [item]`!
+- `random.gauss` produces values in a normal distribution, given a mean and
+  standard deviation
 
 ## Links and resources
 
