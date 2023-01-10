@@ -145,8 +145,27 @@
 - `random.choice` picks a single value out of a list
 - `random.choices` picks a list of values out of a list, allowing for the number
   of selections to provided
-- `random.sample` samples values from a list, while allowing for defining the
-  number of occurrences of different items in the list in the function call
+- `random.sample` samples unique values from a list, while allowing for defining
+  the number of occurrences of different items in the list in the function call
+- `random.shuffle` will mutate a given list of values
+- `random.choices` allows for weights to be passed through. If no weights are
+  provided, the items in the choices will be yielded with an even distribution
+- the first item `sample` out of sample is equivalent to using `choice`:
+
+  ```python
+  xs = [1,2,3]
+
+  # y and z are equivalent
+  y: int = sample(xs, k=1)[0]
+  z: int = choice(xs)
+  ```
+
+- `shuffle` is also a specialised case of `sample`:
+
+  ```python
+  xs = [1,2,3]
+  sample_shuffle = sample(xs, k=len(xs)) # => similar outcome to shuffle
+  ```
 
 ## Links and resources
 
