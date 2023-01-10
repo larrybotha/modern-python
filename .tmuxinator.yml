@@ -1,8 +1,11 @@
+---
 name: <%= Dir.pwd.split('/')[-1] %>
 root: <%= Dir.pwd %>
 
 windows:
   - main:
       layout: main-vertical
+      panes:
         - pipenv shell vim
+        - pipenv shell
         - pipenv shell
